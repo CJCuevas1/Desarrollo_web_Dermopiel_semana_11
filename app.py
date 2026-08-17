@@ -2,47 +2,34 @@ from flask import Flask, render_template
 
 app = Flask(__name__)
 
-# Ruta Principal (Carga la página informativa)
 @app.route('/')
 def index():
-    return render_template('index.html')
+    # Variable simple solicitada en la guía
+    usuario = "Carlos"
+    return render_template('index.html', usuario=usuario)
 
-# Módulo de Productos
 @app.route('/productos')
 def productos():
-    lista_productos = [
-        {"id": 1, "nombre": "Crema Hidratante Facial", "precio": 25.00, "stock": 15},
-        {"id": 2, "nombre": "Sérum Vitamina C", "precio": 38.50, "stock": 10},
-        {"id": 3, "nombre": "Mascarilla Purificante", "precio": 18.00, "stock": 20}
+    # Lista de diccionarios con datos de Dermopiel
+    servicios = [
+        {"id": 1, "nombre": "limpieza facial profunda", "precio": 35.00, "disponible": True, "categoria": "Faciales"},
+        {"id": 2, "nombre": "peeling quimico", "precio": 60.00, "disponible": False, "categoria": "Tratamientos Avanzados"},
+        {"id": 3, "nombre": "masaje descontracturante", "precio": 45.00, "disponible": True, "categoria": "Corporales"},
+        {"id": 4, "nombre": "podologia clinica", "precio": 25.00, "disponible": True, "categoria": "Cuidado Especial"}
     ]
-    return render_template('productos.html', productos=lista_productos)
+    return render_template('productos.html', servicios=servicios)
 
-# Módulo de Clientes
 @app.route('/clientes')
 def clientes():
-    lista_clientes = [
-        {"id": 1, "nombre": "María García", "telefono": "0991234567", "email": "maria@gmail.com"},
-        {"id": 2, "nombre": "Juan Pérez", "telefono": "0987654321", "email": "juan@gmail.com"}
-    ]
-    return render_template('clientes.html', clientes=lista_clientes)
+    return render_template('clientes.html')
 
-# Módulo de Proveedores
 @app.route('/proveedores')
 def proveedores():
-    lista_proveedores = [
-        {"id": 1, "empresa": "DermoLab S.A.", "contacto": "Dra. Ana López", "telefono": "022555123"},
-        {"id": 2, "empresa": "Cosmética Natural Co.", "contacto": "Carlos Ruiz", "telefono": "022888456"}
-    ]
-    return render_template('proveedores.html', proveedores=lista_proveedores)
+    return render_template('proveedores.html')
 
-# Módulo de Facturación
 @app.route('/facturacion')
 def facturacion():
-    lista_facturas = [
-        {"num": "001-001-0001", "cliente": "María García", "fecha": "2026-08-11", "total": 63.50},
-        {"num": "001-001-0002", "cliente": "Juan Pérez", "fecha": "2026-08-11", "total": 25.00}
-    ]
-    return render_template('facturacion.html', facturas=lista_facturas)
+    return render_template('facturacion.html')
 
 if __name__ == '__main__':
     app.run(debug=True)

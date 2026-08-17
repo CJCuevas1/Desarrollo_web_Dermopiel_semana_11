@@ -1,20 +1,29 @@
 {% extends "base.html" %}
-{% block title %}Productos - Dermopiel{% endblock %}
+
+{% block title %}Servicios - Dermopiel{% endblock %}
+
 {% block content %}
-<h2><i class="bi bi-box"></i> Gestión de Productos</h2>
-<table class="table table-striped table-hover mt-3">
-    <thead class="table-dark">
-        <tr><th>ID</th><th>Nombre</th><th>Precio</th><th>Stock</th></tr>
-    </thead>
-    <tbody>
-        {% for p in productos %}
-        <tr>
-            <td>{{ p.id }}</td>
-            <td>{{ p.nombre }}</td>
-            <td>${{ "%.2f"|format(p.precio) }}</td>
-            <td><span class="badge bg-success">{{ p.stock }} unidades</span></td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+<h2 class="mb-4">Nuestros Servicios y Tratamientos</h2>
+
+<div class="row">
+    {% for servicio in servicios %}
+    <div class="col-md-6 col-lg-3 mb-4">
+        <div class="card h-100 shadow-sm">
+            <div class="card-body">
+                <!-- Filtro Jinja2 (|upper) -->
+                <h5 class="card-title text-primary">{{ servicio.nombre|upper }}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">{{ servicio.categoria }}</h6>
+                <p class="card-text fs-4 fw-bold">${{ "%.2f"|format(servicio.precio) }}</p>
+                
+                <!-- Condicional Jinja2 -->
+                {% if servicio.disponible %}
+                    <span class="badge bg-success">Disponible</span>
+                {% else %}
+                    <span class="badge bg-danger">Sin Turno / Agotado</span>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
 {% endblock %}
