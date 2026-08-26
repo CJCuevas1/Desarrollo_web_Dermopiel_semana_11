@@ -1,29 +1,16 @@
-{% extends "base.html" %}
-
-{% block title %}Servicios - Dermopiel{% endblock %}
-
-{% block content %}
-<h2 class="mb-4">Nuestros Servicios y Tratamientos</h2>
-
-<div class="row">
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Productos</title>
+</head>
+<body>
+    <h1>Lista de Servicios / Productos</h1>
+    <ul>
     {% for servicio in servicios %}
-    <div class="col-md-6 col-lg-3 mb-4">
-        <div class="card h-100 shadow-sm">
-            <div class="card-body">
-                <!-- Filtro Jinja2 (|upper) -->
-                <h5 class="card-title text-primary">{{ servicio.nombre|upper }}</h5>
-                <h6 class="card-subtitle mb-2 text-muted">{{ servicio.categoria }}</h6>
-                <p class="card-text fs-4 fw-bold">${{ "%.2f"|format(servicio.precio) }}</p>
-                
-                <!-- Condicional Jinja2 -->
-                {% if servicio.disponible %}
-                    <span class="badge bg-success">Disponible</span>
-                {% else %}
-                    <span class="badge bg-danger">Sin Turno / Agotado</span>
-                {% endif %}
-            </div>
-        </div>
-    </div>
+        <li>{{ servicio.nombre }} - ${{ servicio.precio }} ({{ servicio.categoria }})</li>
     {% endfor %}
-</div>
-{% endblock %}
+    </ul>
+    <a href="/productos/nuevo">Registrar otro producto</a>
+</body>
+</html>
